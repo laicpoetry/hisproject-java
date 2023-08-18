@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.hisproject.mapper.DiseaseMapper">
+	<resultMap type="Disease" id="DiseaseResult">
+		<result property="id" column="id" />
+		<result property="diseaseCode" column="disease_code" />
+		<result property="diseaseName" column="disease_name" />
+		<result property="diseaseICD" column="diseaseICD" />
+		<result property="diseaseCategory" column="disease_category" />
+	</resultMap>
+	<select id="getAll" parameterType="Disease" resultMap="DiseaseResult">
+		select * from disease
+	</select>
+</mapper>

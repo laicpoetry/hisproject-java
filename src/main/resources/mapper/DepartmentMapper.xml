@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.hisproject.mapper.DepartmentMapper">
+	<resultMap type="Department" id="DepartmentResult">
+		<result property="id" column="id" />
+		<result property="deptCode" column="dept_code" />
+		<result property="deptName" column="dept_name" />
+		<result property="deptType" column="dept_type" />
+		<result property="delmark" column="delmark" />
+
+	</resultMap>
+	<select id="getAll" resultMap="DepartmentResult">
+		select * from department where dept_type = '检查'
+	</select>
+</mapper>

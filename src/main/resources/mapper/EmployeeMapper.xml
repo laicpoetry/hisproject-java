@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.hisproject.mapper.EmployeeMapper">
+	<resultMap type="Employee" id="EmployeeResult">
+		<result property="id" column="id" />
+		<result property="realname" column="realname" />
+		<result property="password" column="password" />
+		<result property="deptmentId" column="deptment_id" />
+		<result property="registLevelId" column="registLevel_id" />
+		<result property="schedulingId" column="scheduling_id" />
+		<result property="delmark" column="disease_category" />
+	</resultMap>
+	<select id="getDoc" resultMap="EmployeeResult">
+		select * from employee where deptment_id = #{deptId}
+	</select>
+</mapper>

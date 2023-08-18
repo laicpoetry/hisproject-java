@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.hisproject.mapper.CheckRequestMapper">
+	<resultMap type="CheckRequest" id="CheckRequestResult">
+
+
+
+		<result property="id" column="id" />
+		<result property="registerId" column="register_id" />
+		<result property="medicalTechnologyId" column="medical_technology_id" />
+		<result property="checkInfo" column="check_info" />
+		<result property="checkPosition" column="check_position" />
+		<result property="creationTime" column="creation_time" />
+		<result property="checkEmployeeId" column="check_employee_id" />
+		<result property="inputcheckEmployeeId" column="inputcheck_employee_id" />
+		<result property="checkTime" column="check_time" />
+		<result property="checkResult" column="check_result" />
+		<result property="checkState" column="check_state" />
+		<result property="checkRemark" column="check_remark" />
+	</resultMap>
+
+	<insert id="addcr" parameterType="CheckRequest">
+		insert into
+		check_request(id,register_id,medical_technology_id,check_info,check_position
+		,creation_time) values
+		(null,#{registerId},#{medicalTechnologyId},#{checkInfo},#{checkPosition},
+		#{creationTime})
+	</insert>
+	<select id="getMsg" parameterType="int" resultMap="CheckRequestResult">
+		select * from check_request where register_id = #{registerId}
+	</select>
+
+</mapper>

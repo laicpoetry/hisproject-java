@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.hisproject.mapper.SettleCategoryMapper">
+	<resultMap type="SettleCategory" id="SettleCategory">
+		<id property="id" column="id" />
+		<result property="settleCode" column="settle_code" />
+		<result property="settleName" column="settle_name" />
+		<result property="sequenceNo" column="sequence_no" />
+		<result property="delmark" column="delmark" />
+	</resultMap>
+
+	<select id="findSettleCategory" resultMap="SettleCategory"
+		parameterType="SettleCategory">
+		select * from settle_category
+	</select>
+
+	<resultMap type="Department" id="Department">
+		<id property="id" column="id" />
+		<result property="deptCode" column="dept_code" />
+		<result property="deptName" column="dept_name" />
+		<result property="deptType" column="dept_type" />
+		<result property="delmark" column="delmark" />
+	</resultMap>
+
+	<select id="findDepartment" resultMap="Department"
+		parameterType="Department">
+		select * from department
+	</select>
+
+
+	<resultMap type="RegistLevel" id="RegistLevel">
+		<id property="id" column="id" />
+		<result property="registCode" column="regist_code" />
+		<result property="registName" column="regist_name" />
+		<result property="registFee" column="regist_fee" />
+		<result property="registQuota" column="regist_quota" />
+		<result property="sequenceNo" column="sequence_no" />
+		<result property="delmark" column="delmark" />
+
+	</resultMap>
+
+	<select id="findregistLevel" resultMap="RegistLevel"
+		parameterType="RegistLevel">
+		select * from regist_level
+	</select>
+
+	<resultMap type="Employee" id="Employee">
+		<id property="id" column="id" />
+		<result property="realname" column="realname" />
+		<result property="password" column="password" />
+		<result property="deptmentId" column="deptment_id" />
+		<result property="registLevelId" column="regist_level_id" />
+		<result property="schedulingId" column="scheduling_id" />
+		<result property="delmark" column="delmark" />
+
+	</resultMap>
+
+	<select id="findEmployee" resultMap="Employee" parameterType="Employee">
+		select * from employee
+	</select>
+
+
+
+	<select id="findcaseNumber" resultType="String">
+		select max(case_number)
+		from register
+	</select>
+</mapper>

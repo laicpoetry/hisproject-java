@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.hisproject.mapper.RegisterMapper">
+
+	<resultMap type="Register" id="RegisterResult">
+		<result property="id" column="id" />
+		<result property="caseNumber" column="case_number" />
+		<result property="realName" column="real_name" />
+		<result property="gender" column="gender" />
+		<result property="cardNumber" column="card_number" />
+		<result property="birthday" column="birthday" />
+		<result property="age" column="age" />
+		<result property="ageType" column="age_type" />
+		<result property="homeAddress" column="home_address" />
+		<result property="visitDate" column="visit_date" />
+		<result property="noon" column="noon" />
+		<result property="deptmentId" column="deptment_id" />
+		<result property="employeeId" column="employee_id" />
+		<result property="registLevelId" column="regist_level_id" />
+		<result property="settleCategoryId" column="settle_category_id" />
+		<result property="isBook" column="is_book" />
+		<result property="registMethod" column="regist_method" />
+		<result property="visitState" column="visit_state" />
+		<result property="registMoney" column="regist_money" />
+	</resultMap>
+
+	<sql id="selectRegisterVo">
+		select id, case_number, real_name, gender, card_number,
+		birthday, age,
+		age_type, home_address, visit_date, noon, deptment_id,
+		employee_id,
+		regist_level_id, settle_category_id, is_book,
+		regist_method,
+		visit_state, regist_money from register
+	</sql>
+
+	<select id="selectRegisterList" parameterType="Register"
+		resultMap="RegisterResult">
+		<include refid="selectRegisterVo" />
+		<where>
+			<if test="caseNumber != null  and caseNumber != ''"> and case_number = #{caseNumber}</if>
+			<if test="realName != null  and realName != ''"> and real_name like concat('%', #{realName}, '%')</if>
+			<if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+			<if test="cardNumber != null  and cardNumber != ''"> and card_number = #{cardNumber}</if>
+			<if test="birthday != null "> and birthday = #{birthday}</if>
+			<if test="age != null "> and age = #{age}</if>
+			<if test="ageType != null  and ageType != ''"> and age_type = #{ageType}</if>
+			<if test="homeAddress != null  and homeAddress != ''"> and home_address = #{homeAddress}</if>
+			<if test="visitDate != null "> and visit_date = #{visitDate}</if>
+			<if test="noon != null  and noon != ''"> and noon = #{noon}</if>
+			<if test="deptmentId != null "> and deptment_id = #{deptmentId}</if>
+			<if test="employeeId != null "> and employee_id = #{employeeId}</if>
+			<if test="registLevelId != null "> and regist_level_id = #{registLevelId}</if>
+			<if test="settleCategoryId != null "> and settle_category_id = #{settleCategoryId}</if>
+			<if test="isBook != null  and isBook != ''"> and is_book = #{isBook}</if>
+			<if test="registMethod != null  and registMethod != ''"> and regist_method = #{registMethod}</if>
+			<if test="visitState != null "> and visit_state = #{visitState}</if>
+			<if test="registMoney != null "> and regist_money = #{registMoney}</if>
+		</where>
+	</select>
+
+	<select id="selectRegisterById" parameterType="Long" resultMap="RegisterResult">
+		<include refid="selectRegisterVo" />
+		where id = #{id}
+	</select>
+
+	<insert id="insertRegister" parameterType="Register"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into register
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="caseNumber != null">case_number,</if>
+			<if test="realName != null">real_name,</if>
+			<if test="gender != null">gender,</if>
+			<if test="cardNumber != null">card_number,</if>
+			<if test="birthday != null">birthday,</if>
+			<if test="age != null">age,</if>
+			<if test="ageType != null">age_type,</if>
+			<if test="homeAddress != null">home_address,</if>
+			<if test="visitDate != null">visit_date,</if>
+			<if test="noon != null">noon,</if>
+			<if test="deptmentId != null">deptment_id,</if>
+			<if test="employeeId != null">employee_id,</if>
+			<if test="registLevelId != null">regist_level_id,</if>
+			<if test="settleCategoryId != null">settle_category_id,</if>
+			<if test="isBook != null">is_book,</if>
+			<if test="registMethod != null">regist_method,</if>
+			<if test="visitState != null">visit_state,</if>
+			<if test="registMoney != null">regist_money,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="caseNumber != null">#{caseNumber},</if>
+			<if test="realName != null">#{realName},</if>
+			<if test="gender != null">#{gender},</if>
+			<if test="cardNumber != null">#{cardNumber},</if>
+			<if test="birthday != null">#{birthday},</if>
+			<if test="age != null">#{age},</if>
+			<if test="ageType != null">#{ageType},</if>
+			<if test="homeAddress != null">#{homeAddress},</if>
+			<if test="visitDate != null">#{visitDate},</if>
+			<if test="noon != null">#{noon},</if>
+			<if test="deptmentId != null">#{deptmentId},</if>
+			<if test="employeeId != null">#{employeeId},</if>
+			<if test="registLevelId != null">#{registLevelId},</if>
+			<if test="settleCategoryId != null">#{settleCategoryId},</if>
+			<if test="isBook != null">#{isBook},</if>
+			<if test="registMethod != null">#{registMethod},</if>
+			<if test="visitState != null">#{visitState},</if>
+			<if test="registMoney != null">#{registMoney},</if>
+		</trim>
+	</insert>
+
+	<update id="updateRegister" parameterType="Register">
+		update register
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="caseNumber != null">case_number = #{caseNumber},</if>
+			<if test="realName != null">real_name = #{realName},</if>
+			<if test="gender != null">gender = #{gender},</if>
+			<if test="cardNumber != null">card_number = #{cardNumber},</if>
+			<if test="birthday != null">birthday = #{birthday},</if>
+			<if test="age != null">age = #{age},</if>
+			<if test="ageType != null">age_type = #{ageType},</if>
+			<if test="homeAddress != null">home_address = #{homeAddress},</if>
+			<if test="visitDate != null">visit_date = #{visitDate},</if>
+			<if test="noon != null">noon = #{noon},</if>
+			<if test="deptmentId != null">deptment_id = #{deptmentId},</if>
+			<if test="employeeId != null">employee_id = #{employeeId},</if>
+			<if test="registLevelId != null">regist_level_id = #{registLevelId},</if>
+			<if test="settleCategoryId != null">settle_category_id = #{settleCategoryId},</if>
+			<if test="isBook != null">is_book = #{isBook},</if>
+			<if test="registMethod != null">regist_method = #{registMethod},</if>
+			<if test="visitState != null">visit_state = #{visitState},</if>
+			<if test="registMoney != null">regist_money = #{registMoney},</if>
+		</trim>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteRegisterById" parameterType="Long">
+		delete from
+		register where id = #{id}
+	</delete>
+
+	<delete id="deleteRegisterByIds" parameterType="String">
+		delete from register where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="selectRegisterByNumber" parameterType="String"
+		resultMap="RegisterResult">
+		<include refid="selectRegisterVo" />
+		where case_number = #{caseNumber}
+	</select>
+
+	<select id="queryJZ" resultMap="RegisterResult">
+		select * from register where visit_state = 2
+	</select>
+
+	<select id="getReg" parameterType="String" resultMap="RegisterResult">
+		<include refid="selectRegisterVo" />
+		<where>
+			<if test="caseNumber != null  and caseNumber != ''"> and case_number = #{caseNumber}</if>
+			<if test="realName != null  and realName != ''"> and real_name like concat('%', #{realName}, '%')</if>
+		</where>
+	</select>
+	<select id="queryGh" parameterType="Register" resultMap="RegisterResult">
+		select *
+		from register where case_number=#{caseNumber}
+		and real_name=#{realName} and visit_state=2
+	</select>
+</mapper>

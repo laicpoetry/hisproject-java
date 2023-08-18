@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.hisproject.mapper.MedicalRecordMapper">
+
+	<resultMap type="MedicalRecord" id="MedicalRecordResult">
+		<result property="id" column="id" />
+		<result property="registerId" column="register_id" />
+		<result property="readme" column="readme" />
+		<result property="present" column="present" />
+		<result property="presentTreat" column="present_treat" />
+		<result property="history" column="history" />
+		<result property="allergy" column="allergy" />
+		<result property="physique" column="physique" />
+		<result property="proposal" column="proposal" />
+		<result property="careful" column="careful" />
+		<result property="diagnosis" column="diagnosis" />
+		<result property="cure" column="cure" />
+	</resultMap>
+
+	<sql id="selectMedicalRecordVo">
+		select id, register_id, readme, present, present_treat, history, allergy,
+		physique, proposal, careful, diagnosis, cure from medical_record
+	</sql>
+
+	<select id="selectMedicalRecordList" parameterType="MedicalRecord"
+		resultMap="MedicalRecordResult">
+		<include refid="selectMedicalRecordVo" />
+		<where>
+			<if test="registerId != null "> and register_id = #{registerId}</if>
+			<if test="readme != null  and readme != ''"> and readme = #{readme}</if>
+			<if test="present != null  and present != ''"> and present = #{present}</if>
+			<if test="presentTreat != null  and presentTreat != ''"> and present_treat = #{presentTreat}</if>
+			<if test="history != null  and history != ''"> and history = #{history}</if>
+			<if test="allergy != null  and allergy != ''"> and allergy = #{allergy}</if>
+			<if test="physique != null  and physique != ''"> and physique = #{physique}</if>
+			<if test="proposal != null  and proposal != ''"> and proposal = #{proposal}</if>
+			<if test="careful != null  and careful != ''"> and careful = #{careful}</if>
+			<if test="diagnosis != null  and diagnosis != ''"> and diagnosis = #{diagnosis}</if>
+			<if test="cure != null  and cure != ''"> and cure = #{cure}</if>
+		</where>
+	</select>
+
+	<select id="selectMedicalRecordById" parameterType="Long"
+		resultMap="MedicalRecordResult">
+		<include refid="selectMedicalRecordVo" />
+		where id = #{id}
+	</select>
+
+	<insert id="insertMedicalRecord" parameterType="MedicalRecord"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into medical_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="registerId != null">register_id,</if>
+			<if test="readme != null">readme,</if>
+			<if test="present != null">present,</if>
+			<if test="presentTreat != null">present_treat,</if>
+			<if test="history != null">history,</if>
+			<if test="allergy != null">allergy,</if>
+			<if test="physique != null">physique,</if>
+			<if test="proposal != null">proposal,</if>
+			<if test="careful != null">careful,</if>
+			<if test="diagnosis != null">diagnosis,</if>
+			<if test="cure != null">cure,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="registerId != null">#{registerId},</if>
+			<if test="readme != null">#{readme},</if>
+			<if test="present != null">#{present},</if>
+			<if test="presentTreat != null">#{presentTreat},</if>
+			<if test="history != null">#{history},</if>
+			<if test="allergy != null">#{allergy},</if>
+			<if test="physique != null">#{physique},</if>
+			<if test="proposal != null">#{proposal},</if>
+			<if test="careful != null">#{careful},</if>
+			<if test="diagnosis != null">#{diagnosis},</if>
+			<if test="cure != null">#{cure},</if>
+		</trim>
+	</insert>
+
+	<update id="updateMedicalRecord" parameterType="MedicalRecord">
+		update medical_record
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="registerId != null">register_id = #{registerId},</if>
+			<if test="readme != null">readme = #{readme},</if>
+			<if test="present != null">present = #{present},</if>
+			<if test="presentTreat != null">present_treat = #{presentTreat},</if>
+			<if test="history != null">history = #{history},</if>
+			<if test="allergy != null">allergy = #{allergy},</if>
+			<if test="physique != null">physique = #{physique},</if>
+			<if test="proposal != null">proposal = #{proposal},</if>
+			<if test="careful != null">careful = #{careful},</if>
+			<if test="diagnosis != null">diagnosis = #{diagnosis},</if>
+			<if test="cure != null">cure = #{cure},</if>
+		</trim>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteMedicalRecordById" parameterType="Long">
+		delete from medical_record where id = #{id}
+	</delete>
+
+	<delete id="deleteMedicalRecordByIds" parameterType="String">
+		delete from medical_record where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>
